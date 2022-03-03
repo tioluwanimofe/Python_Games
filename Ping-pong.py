@@ -9,6 +9,7 @@
 # Make game one player
 # By @ Tioluwanimofe
 import turtle as tt
+
 # import win sound
 # import Wikipedia as wiki
 
@@ -45,8 +46,8 @@ ball.shape("circle")
 ball.color("yellow")
 ball.penup()
 ball.goto(0, 0)
-ball.dx = 0.09
-ball.dy = 0.09
+ball.dx = 0.3
+ball.dy = 0.3
 
 # Score
 score_a = 0
@@ -134,8 +135,8 @@ def paddle_b_left():
 window.listen()
 window.onkeypress(paddle_a_up, "Up")
 window.onkeypress(paddle_a_down, "Down")
-window.onkeypress(paddle_b_up, "Left")
-window.onkeypress(paddle_b_down, "Right")
+window.onkeypress(paddle_b_up, "a")
+window.onkeypress(paddle_b_down, "s")
 window.onkeypress(paddle_a_right, "m")
 window.onkeypress(paddle_a_left, "o")
 window.onkeypress(paddle_b_right, "f")
@@ -152,6 +153,14 @@ while True:
     ball.sety(ball.ycor() + ball.dy)
 
     # Border checking
+    if paddle_a.ycor() > 290:
+        paddle_a.sety(290)
+    if paddle_a.ycor() < -290:
+        paddle_a.sety(-290)
+    if paddle_b.ycor() > 290:
+        paddle_b.sety(290)
+    if paddle_b.ycor() < -290:
+        paddle_b.sety(-290)
     if ball.ycor() > 280:
         ball.sety(280)
         ball.dy *= -1
@@ -172,6 +181,7 @@ while True:
         pen.clear()
         pen.write("Player A : {} Player B : {}".format(score_a, score_b), align="center", font=("Courier", 24, "normal")
                   )
+
     #  Paddle and ball collision
     if (340 < ball.xcor() < 350) and (paddle_b.ycor() + 40 > ball.ycor() > paddle_b.ycor() - 40):
         ball.setx(340)
